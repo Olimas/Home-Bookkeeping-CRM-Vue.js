@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Создать</h4>
+        <h4>{{'Create'|localize}}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
@@ -11,14 +11,13 @@
             id="name"
             type="text"
             v-model="title"
-            :class="{ invalid: $v.title.$dirty && !$v.title.required }"
-          />
-          <label for="name">Название</label>
+            :class="{invalid: $v.title.$dirty && !$v.title.required}"
+          >
+          <label for="name">{{'Title'|localize}}</label>
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
-            >Введите название категории</span
-          >
+          >{{'Message_CategoryTitle'|localize}}</span>
         </div>
 
         <div class="input-field">
@@ -26,18 +25,17 @@
             id="limit"
             type="number"
             v-model.number="limit"
-            :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
-          />
-          <label for="limit">Лимит</label>
+            :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
+          >
+          <label for="limit">{{'Limit'|localize}}</label>
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
-            >Минимальное значение {{ $v.limit.$params.minValue.min }}</span
-          >
+          >{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Создать
+          {{'Create'|localize}}
           <i class="material-icons right">send</i>
         </button>
       </form>
@@ -46,11 +44,12 @@
 </template>
 
 <script>
-import { required, minValue } from "vuelidate/lib/validators";
+import { required, minValue } from 'vuelidate/lib/validators'
+import localizeFilter from '@/filters/localize.filter'
 
 export default {
   data: () => ({
-    title: "",
+    title: '',
     limit: 100
   }),
   validations: {
@@ -58,26 +57,27 @@ export default {
     limit: { minValue: minValue(100) }
   },
   mounted() {
-    M.updateTextFields();
+    M.updateTextFields()
   },
   methods: {
     async submitHandler() {
       if (this.$v.$invalid) {
-        this.$v.$touch();
-        return;
+        this.$v.$touch()
+        return
       }
+
       try {
-        const category = await this.$store.dispatch("createCategory", {
+        const category = await this.$store.dispatch('createCategory', {
           title: this.title,
           limit: this.limit
-        });
+        })
         this.title = ''
         this.limit = 100
         this.$v.$reset()
-        this.$message('Категория была создана')
+        this.$message(localizeFilter('Category_HasBeenCreated'))
         this.$emit('created', category)
       } catch (e) {}
     }
   }
-};
+}
 </script>

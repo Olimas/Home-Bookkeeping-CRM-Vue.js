@@ -16,7 +16,7 @@
         <router-link
           class="btn-floating btn-large blue"
           to="/record"
-          v-tooltip="'Создать новую запись'"
+          v-tooltip="'CreateNewRecord'"
         >
           <i class="large material-icons">add</i>
         </router-link>
@@ -57,7 +57,7 @@ export default {
   },
   watch: {
     error(fbError) {
-      this.$error(messages[fbError.code] || 'Что-то пошло не так');
+      this.$error(messages[fbError.code] || 'Error');
     }
   }
 };
