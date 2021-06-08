@@ -9,5 +9,4 @@ Learning practice using Vue.js
 Vue 2, Vuex, Materiallize CSS, Firebase
 Libraries: vuelidate, vuejs-paginate, vue-chartjs, VueMeta
 ```
-### This application is made from YouTube tutorials Vladilen
-```
+This application is made from YouTube tutorials Vladilen
