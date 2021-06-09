@@ -1,7 +1,9 @@
 # Home Bookkeeping, CRM
 Hosting URL: https://crm-vue-1eee7.web.app
 Note:
+```
 The first page (Bill / Счет) is not displayed due to certificate security issues http://data.fixer.io/api/
+
 ## Description:
 ```
 Learning practice using Vue.js
